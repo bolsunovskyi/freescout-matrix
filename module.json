@@ -12,7 +12,7 @@
     "active": 0,
     "order": 0,
     "providers": [
-        "Modules\\MatrixNotification\\Providers\\MatrixNotificationServiceProvider",
+        "Modules\\MatrixNotification\\Providers\\MatrixNotificationServiceProvider"
     ],
     "aliases": {},
     "files": [
