@@ -158,7 +158,7 @@ class MatrixNotificationServiceProvider extends ServiceProvider
                     $formatted_fields[] = $field;
                 }
             }
-            $pretext = $pretext.' <a href="'.$conversation->url().'">#'.$conversation->number.'</a>';
+            $linktext = $pretext.' <a href="'.$conversation->url().'">#'.$conversation->number.'</a>';
 
             // Conversation field becomes a text.
             $text = '';
@@ -167,7 +167,7 @@ class MatrixNotificationServiceProvider extends ServiceProvider
                 $text .= $fields['conversation']['value'];
             }
 
-            $message = $pretext."<br /><br />".$text;
+            $message = $linktext."<br /><br />".$text;
 
             // Add fields;
             foreach ($fields as $key => $field) {
@@ -193,7 +193,7 @@ class MatrixNotificationServiceProvider extends ServiceProvider
                     CURLOPT_POSTFIELDS => json_encode([
                         'msgtype' => 'm.text',
                         'formatted_body' => $message,
-                        'body' => $message,
+                        'body' => $pretext,
                         'format' => 'org.matrix.custom.html',
                     ]),
                     CURLOPT_HTTPHEADER => [
@@ -218,7 +218,7 @@ class MatrixNotificationServiceProvider extends ServiceProvider
             }
             \Helper::backgroundAction('matrixnotification.post', [
                 $conversation,
-                __('A <b>New Conversation</b> was created by :user_name', [
+                __('A new conversation was created by :user_name', [
                     'user_name'   => self::escape($user_name),
                 ]),
             ]);
@@ -230,7 +230,7 @@ class MatrixNotificationServiceProvider extends ServiceProvider
             }
             \Helper::backgroundAction('matrixnotification.post', [
                 $conversation,
-                __('A <b>New Conversation</b> was created'),
+                __('A new conversation was created'),
             ]);
         }, 20, 2);
 
@@ -245,7 +245,7 @@ class MatrixNotificationServiceProvider extends ServiceProvider
             }
             \Helper::backgroundAction('matrixnotification.post', [
                 $conversation,
-                __('Conversation <b>assigned</b> to <b>:assignee_name</b> by :user_name', [
+                __('Conversation assigned to :assignee_name by :user_name', [
                     'assignee_name' => self::escape($assignee_name),
                     'user_name'     => self::escape($by_user->getFullName()),
                 ]),
@@ -268,7 +268,7 @@ class MatrixNotificationServiceProvider extends ServiceProvider
 
             \Helper::backgroundAction('matrixnotification.post', [
                 $conversation,
-                __('A <b>note was added</b> by :user_name', [
+                __('A note was added by :user_name', [
                     'user_name'     => self::escape($thread->created_by_user->getFullName()),
                 ]),
                 $fields
@@ -282,7 +282,7 @@ class MatrixNotificationServiceProvider extends ServiceProvider
             }
             \Helper::backgroundAction('matrixnotification.post', [
                 $conversation,
-                __('A customer <b>replied</b> to a conversation'),
+                __('A customer replied to a conversation'),
             ]);
         }, 20, 2);
 
@@ -293,7 +293,7 @@ class MatrixNotificationServiceProvider extends ServiceProvider
             }
             \Helper::backgroundAction('matrixnotification.post', [
                 $conversation,
-                __(':user_name <b>replied</b>', [
+                __(':user_name replied', [
                     'user_name' => self::escape($thread->created_by_user->getFullName()),
                 ]),
             ]);
@@ -307,7 +307,7 @@ class MatrixNotificationServiceProvider extends ServiceProvider
             // Create a background job for posting a message.
             \Helper::backgroundAction('matrixnotification.post', [
                 $conversation,
-                __('Conversation <b>status changed</b> to <b>:status</b> by :user_name', [
+                __('Conversation status changed to :status by :user_name', [
                     'status'    => $conversation->getStatusName(),
                     'user_name' => $user->getFullName(),
                 ]),
