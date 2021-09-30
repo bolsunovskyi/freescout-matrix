@@ -13,11 +13,8 @@
     "order": 0,
     "providers": [
         "Modules\\MatrixNotification\\Providers\\MatrixNotificationServiceProvider",
-        "Updivision\\Matrix\\MatrixServiceProvider"
     ],
-    "aliases": {
-        "Matrix": "Updivision\\Matrix\\Facades\\Matrix"
-    },
+    "aliases": {},
     "files": [
         "start.php"
     ],
