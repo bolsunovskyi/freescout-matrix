@@ -1,0 +1,25 @@
+{
+    "name": "freescout/matrixnotification",
+    "description": "",
+    "authors": [
+        {
+            "name": "FreeScout",
+            "email": "support@freescout.net"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Modules\\MatrixNotification\\Providers\\MatrixNotificationServiceProvider"
+            ],
+            "aliases": {
+                
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\MatrixNotification\\": ""
+        }
+    }
+}
