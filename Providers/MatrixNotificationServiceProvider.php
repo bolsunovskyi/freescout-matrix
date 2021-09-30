@@ -35,7 +35,7 @@ class MatrixNotificationServiceProvider extends ServiceProvider
     public function hooks()
     {
         \Eventy::addFilter('settings.sections', function($sections) {
-            $sections['matrixnotification'] = ['title' => __('Matrix Notifications'), 'icon' => 'envelope', 'order' => 800];
+            $sections['matrixnotification'] = ['title' => __('Matrix Notifications'), 'icon' => 'envelope', 'order' => 900];
 
             return $sections;
         }, 30);
